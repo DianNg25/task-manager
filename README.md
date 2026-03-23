@@ -7,20 +7,20 @@ Một ứng dụng Single Page Application (SPA) giúp người dùng quản lý
 **Yêu cầu môi trường:** Đảm bảo máy tính của bạn đã cài đặt Node.js (khuyên dùng bản LTS).
 
 **Bước 1:** Clone repository này về máy local:
-\`\`\`bash
+```bash
 git clone https://github.com/DianNg25/task-manager
 cd task-manager
-\`\`\`
+```
 
 **Bước 2:** Cài đặt các thư viện (dependencies):
-\`\`\`bash
+```bash
 npm install
-\`\`\`
+```
 
 **Bước 3:** Khởi động server ở chế độ development:
-\`\`\`bash
+```bash
 npm run dev
-\`\`\`
+```
 
 **Bước 4:** Mở trình duyệt và truy cập vào địa chỉ mặc định: `http://localhost:5173`
 
