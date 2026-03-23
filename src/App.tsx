@@ -3,6 +3,7 @@ import { useLocalStorage } from './hooks/useLocalStorage';
 import type { Task, TaskStatus } from './types';
 import TaskForm from './components/task/TaskForm';
 import TaskList from './components/task/TaskList';
+import Swal from 'sweetalert2'; // <-- Import thư viện xịn xò vào đây
 import { 
   LayoutGrid, 
   CheckCircle2, 
@@ -18,16 +19,51 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterStatus, setFilterStatus] = useState<TaskStatus | 'ALL'>('ALL');
 
-  const handleAddTask = (newTask: Task) => setTasks([newTask, ...tasks]);
+  // Nâng cấp: Hiển thị Toast thông báo khi thêm thành công
+  const handleAddTask = (newTask: Task) => {
+    setTasks([newTask, ...tasks]);
+    
+    // Cấu hình Toast nhỏ gọn ở góc màn hình
+    Swal.fire({
+      toast: true,
+      position: 'top-end',
+      icon: 'success',
+      title: 'Đã thêm công việc mới!',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+    });
+  };
   
   const handleUpdateStatus = (id: string, newStatus: TaskStatus) => {
     setTasks(tasks.map(task => task.id === id ? { ...task, status: newStatus } : task));
   };
 
+  // Nâng cấp: Thay thế window.confirm bằng Popup xịn xò
   const handleDeleteTask = (id: string) => {
-    if (window.confirm('Bạn có chắc chắn muốn xóa công việc này?')) {
-      setTasks(tasks.filter(task => task.id !== id));
-    }
+    Swal.fire({
+      title: 'Bạn có chắc chắn?',
+      text: "Công việc này sẽ bị xóa và không thể khôi phục!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#ef4444', // Màu đỏ Tailwind (red-500)
+      cancelButtonColor: '#9ca3af', // Màu xám (gray-400)
+      confirmButtonText: 'Đúng, xóa nó!',
+      cancelButtonText: 'Hủy'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setTasks(tasks.filter(task => task.id !== id));
+        
+        // Hiện thông báo đã xóa nhanh
+        Swal.fire({
+          title: 'Đã xóa!',
+          text: 'Công việc đã được dọn dẹp.',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        });
+      }
+    });
   };
 
   const stats = useMemo(() => {
@@ -105,7 +141,6 @@ function App() {
             <div className="bg-white p-6 md:p-7 rounded-2xl shadow-sm border border-gray-100 min-h-[400px]">
               
               <div className="flex flex-col sm:flex-row gap-4 mb-6 pb-6 border-b border-gray-100">
-                {/* Ô tìm kiếm */}
                 <div className="relative flex-1">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <Search className="w-5 h-5 text-gray-400" />
