@@ -2,6 +2,17 @@
 
 Một ứng dụng Single Page Application (SPA) giúp người dùng quản lý công việc cá nhân hiệu quả, được xây dựng với ReactJS, TypeScript và Tailwind CSS.
 
+## ✨ Tính năng chính
+* **CRUD Công việc:** Thêm, cập nhật trạng thái (Cần làm, Đang làm, Hoàn thành), và xóa công việc.
+* **Quản lý Hạn chót (Deadline):** Tự động nhận diện và cảnh báo màu sắc cho các công việc quá hạn hoặc tới hạn trong ngày.
+* **Thống kê Real-time:** Hiển thị tổng số công việc, số lượng đã hoàn thành và số lượng quá hạn.
+* **Tìm kiếm & Lọc:** Tìm kiếm theo tên công việc và lọc theo từng trạng thái.
+* **Trải nghiệm người dùng (UX) mượt mà:** Sử dụng SweetAlert2 cho các thông báo, cảnh báo lỗi và xác nhận thông minh.
+* **Lưu trữ cục bộ:** Tự động đồng bộ dữ liệu với `localStorage`, không mất dữ liệu khi F5.
+* **Responsive UI:** Giao diện tương thích hoàn hảo trên cả thiết bị di động và máy tính bàn.
+
+---
+
 ## 🚀 Hướng dẫn cài đặt và chạy local
 
 **Yêu cầu môi trường:** Đảm bảo máy tính của bạn đã cài đặt Node.js (khuyên dùng bản LTS).
